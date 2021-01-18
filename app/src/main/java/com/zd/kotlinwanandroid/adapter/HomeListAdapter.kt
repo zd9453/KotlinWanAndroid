@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.helper.widget.Layer
 import androidx.recyclerview.widget.RecyclerView
 import com.zd.kotlinwanandroid.R
 import com.zd.kotlinwanandroid.bean.home.HomeListBean
@@ -22,6 +23,7 @@ import com.zd.kotlinwanandroid.bean.home.HomeListBean
 class HomeListAdapter : RecyclerView.Adapter<HomeListAdapter.Holder>() {
 
     private var listData: ArrayList<HomeListBean>? = null
+    var listener: ItemListener? = null
 
     fun setData(list: ArrayList<HomeListBean>) {
         this.listData = list
@@ -39,6 +41,7 @@ class HomeListAdapter : RecyclerView.Adapter<HomeListAdapter.Holder>() {
         val head: ImageView = itemView.findViewById(R.id.head_img)
         val name: TextView = itemView.findViewById(R.id.name)
         val content: TextView = itemView.findViewById(R.id.content)
+        val layer2: Layer = itemView.findViewById(R.id.layer2)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
@@ -60,6 +63,13 @@ class HomeListAdapter : RecyclerView.Adapter<HomeListAdapter.Holder>() {
 
         holder.head.setImageResource(bean!!.headImg)
 
+        holder.itemView.setOnClickListener(View.OnClickListener {
+            listener?.itemClick(position, bean.name)
+        })
+
     }
 
+    public interface ItemListener {
+        fun itemClick(position: Int, string: String)
+    }
 }

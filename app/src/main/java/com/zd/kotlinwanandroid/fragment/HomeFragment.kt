@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.zd.kotlinwanandroid.R
 import com.zd.kotlinwanandroid.model.TestViewModel
+import com.zd.kotlinwanandroid.utils.DisplayUtil
 
 /**
  * Package: com.zd.kotlinwanandroid.fragment
@@ -25,7 +26,6 @@ import com.zd.kotlinwanandroid.model.TestViewModel
 class HomeFragment : Fragment() {
 
     companion object {
-        @JvmStatic
         fun newInstance(): HomeFragment {
             val arg = Bundle()
             arg.putString("tag", "this tag")
@@ -75,10 +75,16 @@ class HomeFragment : Fragment() {
     }
 
     private fun initData() {
-        val viewModel = ViewModelProvider(this).get(TestViewModel::class.java)
+
+        val viewModel = ViewModelProvider.AndroidViewModelFactory(activity!!.application)
+            .create(TestViewModel::class.java)
+
 
         val int = viewModel.getInt()
         Toast.makeText(context, int.toString(), Toast.LENGTH_SHORT).show()
+
+        val str = DisplayUtil.stringGet("自有多少只有你知道", 5)
+        println(str)
     }
 
 

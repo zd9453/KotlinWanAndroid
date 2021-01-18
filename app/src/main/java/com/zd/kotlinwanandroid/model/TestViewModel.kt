@@ -1,7 +1,9 @@
 package com.zd.kotlinwanandroid.model
 
+import android.app.Application
+import android.widget.Toast
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 
 /**
  * Package: com.zd.kotlinwanandroid.model
@@ -14,7 +16,7 @@ import androidx.lifecycle.ViewModel
  * @since 1.0
  */
 
-class TestViewModel : ViewModel() {
+class TestViewModel(application: Application) : AndroidViewModel(application) {
 
     var liveData: MutableLiveData<Int> = MutableLiveData()
 
@@ -32,6 +34,9 @@ class TestViewModel : ViewModel() {
     fun setInt(i: Int?) {
         cont = i
         liveData.postValue(cont)
+
+//        val application = getApplication<Application>()
+//        Toast.makeText(application, "$cont", Toast.LENGTH_SHORT).show()
     }
 
 }

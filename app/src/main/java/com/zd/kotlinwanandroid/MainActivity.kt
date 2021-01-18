@@ -20,7 +20,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewModel = ViewModelProvider(this).get(TestViewModel::class.java)
+        viewModel = ViewModelProvider.AndroidViewModelFactory(this.application).create(TestViewModel::class.java)
+
         viewModel?.liveData?.observe(this, Observer {
             Toast.makeText(this, "this liveData $it", Toast.LENGTH_LONG).show()
         })

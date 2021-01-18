@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -17,7 +18,7 @@ import com.zd.kotlinwanandroid.bean.home.HomeListBean
 import com.zd.kotlinwanandroid.model.LiveDataTestModel
 import kotlinx.android.synthetic.main.blank_fragment.*
 
-class BlankFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
+class BlankFragment : Fragment(), SeekBar.OnSeekBarChangeListener, HomeListAdapter.ItemListener {
 
     companion object {
         fun newInstance() = BlankFragment()
@@ -67,6 +68,8 @@ class BlankFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
         }
         adapter?.setData(data)
 
+        adapter?.listener = this
+
     }
 
     override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
@@ -79,6 +82,10 @@ class BlankFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
 
     override fun onStopTrackingTouch(p0: SeekBar?) {
 
+    }
+
+    override fun itemClick(position: Int, string: String) {
+        Toast.makeText(context, string, Toast.LENGTH_SHORT).show()
     }
 
 }
