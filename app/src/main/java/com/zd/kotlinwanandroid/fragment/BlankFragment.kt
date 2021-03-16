@@ -62,6 +62,7 @@ class BlankFragment : Fragment(), SeekBar.OnSeekBarChangeListener, HomeListAdapt
         rcv_list.adapter = adapter
 
         var data = ArrayList<HomeListBean>()
+        var listMore = ArrayList<Any>()
 
         for (i in 0..15) {
             data.add(HomeListBean("名字$i", "this is content $i"))

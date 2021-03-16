@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.zd.kotlinwanandroid.fragment.HomeFragment
+import com.zd.kotlinwanandroid.model.LiveDataSingle
 import com.zd.kotlinwanandroid.model.TestViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -20,7 +21,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewModel = ViewModelProvider.AndroidViewModelFactory(this.application).create(TestViewModel::class.java)
+        LiveDataSingle.live.observe(this, Observer {
+            Toast.makeText(this, "this liveData $it", Toast.LENGTH_LONG).show()
+        })
+
+        viewModel = ViewModelProvider.AndroidViewModelFactory(App.appContext!!)
+            .create(TestViewModel::class.java)
 
         viewModel?.liveData?.observe(this, Observer {
             Toast.makeText(this, "this liveData $it", Toast.LENGTH_LONG).show()
@@ -59,7 +65,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        viewModel?.setInt((viewModel?.getInt()))
+        Toast.makeText(this, viewModel?.getInt().toString(), Toast.LENGTH_SHORT).show()
+//        viewModel?.setInt((viewModel?.getInt()))
     }
 
 }

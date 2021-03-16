@@ -1,7 +1,7 @@
 package com.zd.kotlinwanandroid.model
 
 import android.app.Application
-import android.widget.Toast
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 
@@ -32,6 +32,7 @@ class TestViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun setInt(i: Int?) {
+        Log.e(">>>>> ", "setInt: ---------- ${cont}")
         cont = i
         liveData.postValue(cont)
 

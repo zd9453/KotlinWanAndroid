@@ -69,7 +69,7 @@ class HomeListAdapter : RecyclerView.Adapter<HomeListAdapter.Holder>() {
 
     }
 
-    public interface ItemListener {
+    interface ItemListener {
         fun itemClick(position: Int, string: String)
     }
 }
