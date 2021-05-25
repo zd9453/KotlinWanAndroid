@@ -1,6 +1,7 @@
 package com.zd.kotlinwanandroid.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,7 @@ import com.zd.kotlinwanandroid.adapter.HomeListAdapter
 import com.zd.kotlinwanandroid.bean.home.HomeListBean
 import com.zd.kotlinwanandroid.model.LiveDataTestModel
 import kotlinx.android.synthetic.main.blank_fragment.*
+import kotlinx.coroutines.*
 
 class BlankFragment : Fragment(), SeekBar.OnSeekBarChangeListener, HomeListAdapter.ItemListener {
 
@@ -37,8 +39,10 @@ class BlankFragment : Fragment(), SeekBar.OnSeekBarChangeListener, HomeListAdapt
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(activity!!).get(LiveDataTestModel::class.java)
-        liveData = viewModel.progressV
+        activity?.let {
+            viewModel = ViewModelProvider(it).get(LiveDataTestModel::class.java)
+            liveData = viewModel.progressV
+        }
 
         liveData?.observe(this, Observer {
             seekBar.progress = it
@@ -64,13 +68,40 @@ class BlankFragment : Fragment(), SeekBar.OnSeekBarChangeListener, HomeListAdapt
         var data = ArrayList<HomeListBean>()
         var listMore = ArrayList<Any>()
 
-        for (i in 0..15) {
+        for (i in 0 until 15) {
             data.add(HomeListBean("名字$i", "this is content $i"))
         }
         adapter?.setData(data)
 
         adapter?.listener = this
 
+
+        runBlocking {
+            Log.e(">>>>>>>>", "---------runBlocking ")
+            withContext(Dispatchers.IO) {
+                Log.e(">>>>>>>>", "---------runBlocking in IO")
+            }
+            Log.e(">>>>>>>>", "---------runBlocking in last")
+        }
+
+        Log.e(">>>>>>>>", "---------runBlocking out")
+
+        GlobalScope.launch {
+            getFile()
+        }
+
+        val async = GlobalScope.async {
+            getFile()
+        }
+
+        GlobalScope.async {
+            Thread.sleep(10000)
+        }
+
+    }
+
+    suspend fun getFile() {
+        Thread.sleep(5000)
     }
 
     override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
