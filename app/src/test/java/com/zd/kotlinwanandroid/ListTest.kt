@@ -59,9 +59,9 @@ class ListTest {
         for ((i, item) in listT.withIndex()) {
             println("$i  $item")
             if (item % 2 == 0)
-                println(item shr 1)     //右移1为 相当于*2
+                println(item shr 1)     //右移1为 相当于/2
             else
-                println(item shl 1)     //左移1位 相当于/2
+                println(item shl 1)     //左移1位 相当于*2
         }
 
         //反转
