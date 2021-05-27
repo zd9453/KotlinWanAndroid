@@ -34,6 +34,11 @@ class ListTest {
         displayMsg(cont = 2)
         displayMsg("test information", 6)
 
+        //匿名函数
+        val msg = { c: String ->
+            c.toUpperCase()
+        }
+        println(msg("adcAvb"))
 
     }
 
@@ -160,5 +165,8 @@ class ListTest {
             return super.equals(other)
         }*/
 
+        public open fun display(msg: String) {
+            println(msg)
+        }
     }
 }
