@@ -21,8 +21,28 @@ class ListTest {
 //        listAbout()
 //        setAbout()
 //        regexAbout()
+        functionAbout()
+
+    }
+
+    /**
+     * 自定义函数
+     */
+    private fun functionAbout() {
+        displayMsg()
+        displayMsg("this is show")
+        displayMsg(cont = 2)
+        displayMsg("test information", 6)
 
 
+    }
+
+    private infix fun show(msg: String) {
+        println(msg)
+    }
+
+    private fun displayMsg(content: String = "default message", cont: Int = 1) {
+        println("displayMsg $cont ->: $content ")
     }
 
     /**
