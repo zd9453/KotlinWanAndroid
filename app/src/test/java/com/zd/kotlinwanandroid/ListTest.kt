@@ -18,9 +18,33 @@ class ListTest {
     fun mainTest() {
         println("this is ListTest mainTest")
 
-        listAbout()
+//        listAbout()
 //        setAbout()
+//        regexAbout()
 
+
+    }
+
+    /**
+     * 正在表达式相关测试
+     */
+    private fun regexAbout() {
+        val contentStr = "MMTest007"
+        val phone = "12345678901"
+
+        val split = contentStr.split("[t|T]".toRegex())
+        println(split)
+
+        println("MMTest(\\d){3}".toRegex().matches(contentStr))
+
+        println(contentStr.matches("^MM.+".toRegex()))
+        println(contentStr.matches("(\\w)*007$".toRegex()))
+        println(contentStr.matches("^[a-zA-Z]+007$".toRegex()))
+
+        println(phone.matches("(\\d){8,11}".toRegex()))
+
+        //替换中间的为****
+        println(phone.replace("(\\d{3})(\\d{4})(\\d{4})".toRegex(), "$1****$3"))
 
     }
 
