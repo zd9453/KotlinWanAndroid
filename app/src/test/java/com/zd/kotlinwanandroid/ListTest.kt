@@ -55,6 +55,15 @@ class ListTest {
     private fun listAbout() {
         //不可变集合
         val listT = listOf<Int>(1, 2, 3, 45, 6, 7)
+
+        for ((i, item) in listT.withIndex()) {
+            println("$i  $item")
+            if (item % 2 == 0)
+                println(item shr 1)     //右移1为 相当于*2
+            else
+                println(item shl 1)     //左移1位 相当于/2
+        }
+
         //反转
         val reversed = listT.reversed()
         println("反转：$reversed")
@@ -95,6 +104,7 @@ class ListTest {
         }
         println(partition.first)
         println(partition.second)
+
 
     }
 
