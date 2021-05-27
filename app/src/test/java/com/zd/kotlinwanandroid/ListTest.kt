@@ -53,9 +53,17 @@ class ListTest {
      * list查找equals判断
      */
     private fun listAbout() {
-        //不可变
+        //不可变集合
         val listT = listOf<Int>(1, 2, 3, 45, 6, 7)
-        println(listT)
+        //反转
+        val reversed = listT.reversed()
+        println("反转：$reversed")
+        //升序
+        val sorted = listT.sorted()
+        println(sorted)
+        //降序
+        val sortedDescending = listT.sortedDescending()
+        println(sortedDescending)
 
         //可变
         val listR = mutableListOf<Any>()
