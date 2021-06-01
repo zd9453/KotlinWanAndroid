@@ -21,7 +21,15 @@ class ListTest {
 //        listAbout()
 //        setAbout()
 //        regexAbout()
-        functionAbout()
+//        functionAbout()
+        classAbout()
+
+    }
+
+    private fun classAbout() {
+        val h = H("a", 8)
+        h.joinCompany("Android开发")
+        println(h.toString())
 
     }
 
@@ -159,14 +167,32 @@ class ListTest {
 
     class H(val name: String, val age: Int) {
 
-        /*override fun equals(other: Any?): Boolean {
+        override fun equals(other: Any?): Boolean {
             if (other is H)
                 return (other.age == this.age && other.name == this.name)
             return super.equals(other)
-        }*/
+        }
+
+        var info: String? = null
+        lateinit var work: String
+            private set
+
+        fun joinCompany(work: String) {
+            this.work = work
+        }
+
+        constructor(info: String) : this("", 1) {
+            this.info = info
+        }
 
         public open fun display(msg: String) {
             println(msg)
         }
+
+        override fun toString(): String {
+            return "H(name='$name', age=$age, info=$info, work='$work')"
+        }
+
+
     }
 }
